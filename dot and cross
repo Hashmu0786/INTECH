@@ -1,0 +1,32 @@
+Ques:
+What is dot product and cross product? Explain use cases of where dot product is used and cross product 
+is used in graphics environment. Add links to places where you studied this information and get back with the understanding. 
+
+Ans:
+The cross product is mostly used to determine the vector, which is perpendicular to the plane surface spanned by two vectors, 
+whereas the dot product is used to find the angle between two vectors or the length of the vector.
+The cross product of two vectors, say A × B, is equal to another vector at right angles to both, and it happens in the three dimensions.
+
+->Ray-Plane Intersection:
+A plane is defined by the equation: Ax + By + Cz + D = 0, or the vector [A B C D]. A, B, and C, define the normal to the plane. If A2 + B2 + C2 = 1 then the unit normal Pn = [A B C]. If A, B, and C define a unit normal, then the distance from the origin [0 0 0] to the plane is D.
+
+A ray is defined by: R0 = [X0, Y0, Z0]
+
+Rd = [Xd, Yd, Zd]
+
+so R(t) = R0 + t * Rd , t > 0
+
+To determine if there is an intersection with the plane, substitute for R(t) into the plane equation and get:
+
+A(X0 + Xd * t) + B(Y0 + Yd * t) + (Z0 + Zd * t) + D = 0
+
+which yields:
+
+t = -(AX0 + BY0 + CZ0 + D) / (AXd + BYd + CZd)
+
+= -(Pn· R0 + D) / (Pn · Rd)
+
+link were I refer:
+https://byjus.com/maths/cross-product/#:~:text=The%20cross%20product%20is%20mostly,the%20length%20of%20the%20vector.
+https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-plane-and-ray-disk-intersection.html
+https://education.siggraph.org/static/HyperGraph/raytrace/rayplane_intersection.htm
