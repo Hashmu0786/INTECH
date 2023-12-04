@@ -1,0 +1,9 @@
+
+Ques:
+Random crashes – you are given a source code to test and it randomly crashes and it never crashes in the same place 
+( you have attached a debugger and you find this). Explain what all you would suspect and how would you go about with isolating the cause. 
+
+Ans:
+ I will try check or Identify any specific actions or conditions that trigger the crash.
+ do code review  paying attention to memory allocation/deallocation, pointer usage, and concurrency issues.
+Implement continuous monitoring tools to capture runtime behavior, even in production, to gather additional insights.
