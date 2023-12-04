@@ -1,0 +1,56 @@
+Ques:
+given a number N, remove one digit and print the largest possible number. 
+E.g. 
+Why is the above solution part of a greedy algorithm?
+5 - 
+1234
+2945
+9273
+3954
+19374
+
+
+
+Answers:
+
+234
+945
+973
+954
+9374
+
+Ans:
+
+import java.util.*;
+public class Bouns {
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        int n =sc.nextInt();
+        String str = Integer.toString(n);
+
+        if(n<10){
+            // if n is a single digit number , the output is 0
+            System.out.println(0);
+        }
+        else{
+            int x =9;
+            for(int i=0;i<str.length();i++){
+                x =Math.min(x, str.charAt(i)-'0');
+            }
+
+            StringBuilder maxi = new StringBuilder();
+            for(int i=0;i<str.length();i++){
+                if(x==str.charAt(i)-'0'){
+                    String temp =str.substring(0,i)+str.substring(i+1);
+                    maxi = new StringBuilder(temp.compareTo(maxi.toString())> 0 ? temp : maxi.toString());
+
+                }
+            }
+            int res =Integer.parseInt((maxi.toString()));
+            System.out.println(res);
+
+        }
+    }
+}
