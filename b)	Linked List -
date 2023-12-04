@@ -1,0 +1,69 @@
+Ques:
+
+b)	Linked List - The link shows a program to find the nth element of a linked list.  https://www.geeksforgeeks.org/nth-node-from-the-end-of-a-linked-list/
+
+Find a way to find the kth to the last element of linked list ( assume length of linked list is not known) 
+Bonus 1: 
+Can you minimize the number of times you run through the loop. 
+
+Ans:
+import java.util.*;
+
+class Node {
+    int data;
+    Node next;
+
+    // constructor to initialize a node with data
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+
+public class link {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the number of element");
+        int n = sc.nextInt();
+
+        Node head = null;
+        System.out.println("enter the element");
+
+        // enter the element and create linkedlist
+        int x = sc.nextInt();
+        head = new Node(x);
+        Node curr = head;
+        for (int i = 1; i < n; i++) {
+            x = sc.nextInt();
+            Node temp = new Node(x);
+            curr.next = temp;
+            curr = temp;
+        }
+
+        System.out.println("Enter the position of the element you want to display from the end ");
+        int k = sc.nextInt();
+
+        // find kth element form the end
+        Node slow = head;
+        Node fast = head;
+
+        // move fast pointer to the kth position
+        while (fast != null && k != 1) {
+            fast = fast.next;
+            k--;
+        }
+        // if k is greater than the length of the list
+        if (fast == null) {
+            System.out.println("The ele is not present in the linked list");
+        } else {
+            // move both pointer until the fast pointer reach the end
+            while (fast.next != null) {
+                slow = slow.next;
+                fast = fast.next;
+
+            }
+            System.out.println("the element is :" + slow.data);
+        }
+    }
+}
