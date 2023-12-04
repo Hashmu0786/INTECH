@@ -1,0 +1,110 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StringCompression {
+
+    // decompress the string passed by the comp2 function
+    static void decompress(String str, ArrayList<Integer> v) {
+        int i = 0, j = 0, n = str.length();
+        StringBuilder res = new StringBuilder();
+
+        // Iterate trough the compressed string and reconstruct the original string
+        while (i < n) {
+            while (i < n && str.charAt(i) != '#') {
+                // repeat the character based on the count stored in the vector
+                for (int c = 1; c <= v.get(j); c++) {
+                    res.append(str.charAt(i));
+                }
+                i++;
+            }
+            i++;
+            j++;
+        }
+        // print the decompresssed string
+        System.out.println("Demcpmression : = " + res);
+    }
+
+    // compress the string passed by the compress1 function
+    static void compress2(StringBuilder str, ArrayList<Integer> v) {
+        int i = 0, j = 1;
+        int n = v.size();
+        ArrayList<Integer> v1 = new ArrayList<>();
+        StringBuilder res = new StringBuilder();
+        res.append(str.charAt(i));
+
+        // Inerate thrugh te couts and compress string to futhre compress
+        while (j < n) {
+            if (v.get(i).equals(v.get(j))) {
+                res.append(str.charAt(j));
+                j++;
+            } else {
+                v1.add(v.get(i));
+                res.append("#");
+
+                i = j;
+                j++;
+                res.append(str.charAt(i));
+            }
+        }
+        // handle the last part of the compressed string
+        res.append("#");
+        v1.add(v.get(i));
+        i = 0;
+        j = 0;
+
+        // Iterate through the further compressed string and print the result
+        while (j < v1.size()) {
+            while (res.charAt(i) != '#') {
+                System.out.print(res.charAt(i));
+                i++;
+            }
+            System.out.print(v1.get(j++));
+            i++;
+        }
+        // for the next line
+        System.out.println();
+
+        // call the decomp function with the furthure compressed string and count vector
+        decompress(res.toString(), v1);
+    }
+
+    // compress a string "str"
+    static void compress1(String str) {
+        int i = 0, j = 1;
+        int n = str.length();
+        ArrayList<Integer> v = new ArrayList<>();
+        StringBuilder res = new StringBuilder();
+
+        // Iterate through the string and create a compressed string and countes vector
+        while (j < n) {
+            if (str.charAt(i) != str.charAt(j)) {
+                res.append(str.charAt(i));
+                v.add(j - i);
+                i = j;
+            }
+            j++;
+        }
+        // handle the last part of the string
+        res.append(str.charAt(i));
+        v.add(j - i);
+
+        // print the compressed string and count vector
+        for (i = 0; i < res.length(); i++) {
+            System.out.print(res.charAt(i) + "" + v.get(i));
+        }
+        // print a newline
+        System.out.println();
+        // call the futhre compression function with the compressed string and count
+        // vector
+        compress2(new StringBuilder(res), v);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the string");
+        String s = sc.next();
+
+        // call the initial comression with the input string
+        compress1(s);
+    }
+}
