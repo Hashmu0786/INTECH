@@ -1,0 +1,50 @@
+Ques:
+
+d)	Given an array of integers representing the elevation of a roof structure at
+various positions, each position is separated by a unit length, Write a program
+to determine the amount of water that will be trapped on the roof after heavy
+rainfall
+Example:
+input : [2 1 3 0 1 2 3]
+Ans : 7 units of water will be trapped
+
+Ans:
+import java.util.*;
+
+public class water {
+
+    static int calc(int[] v, int n){
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int w=0;
+
+        left[0] =v[0];
+        for(int i=1; i<n; i++){
+            left[i] = Math.max(left[i-1],v[i]);
+        }
+        right[n-1] = v[n-1];
+        for(int i=n-2;i>=0;i--){
+            right[i] =Math.max(right[i+1],v[i]);
+        }
+        for(int i=0;i<n;i++){
+            int temp =Math.min(left[i],right[i]);
+            if(temp>v[i]){
+                w+=temp -v[i];
+            }
+        }
+        return w;
+    }
+    
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        System.out.print("Enter the Nmber");
+        int n= sc.nextInt();
+
+        int[] v = new int[n];
+        System.out.println("Enter the element");
+        for(int i=0;i<n;i++){
+            v[i] =sc.nextInt();
+        }
+        System.out.println(calc(v, n));
+    }
+}
